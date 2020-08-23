@@ -4,11 +4,12 @@
 '''
     Beschreibung:
 '''
-from os import path
+from os import path, sep
 from os import getcwd as arbeitsverzeichnis
 from os import chdir
 from datetime import datetime
 import numpy as np
+
 
 ### eigen Skripte ###
 
@@ -77,7 +78,7 @@ def verzeichnis_check():
         chdir("..")
 
     # neuen Pfad festlegen
-    pfad = arbeitsverzeichnis() + "/Daten/"
+    pfad = sep.join([arbeitsverzeichnis(), "Daten"])
 
     # neuen Pfad setzen
     chdir(pfad)
@@ -87,7 +88,7 @@ def verzeichnis_check():
 
 def datei_check(pfad, dateiname):
 
-    if path.isfile((pfad + "/" + dateiname)):
+    if path.isfile((sep.join([pfad, dateiname]))):
         print("Datei ist vorhanden")
 
         return True

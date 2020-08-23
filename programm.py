@@ -17,7 +17,7 @@ from kivy.uix.button import Button
 
 from os import getcwd as arbeitsverzeichnis
 from os import chdir
-from os import path
+from os import path, sep
 from datetime import datetime
 import sys
 
@@ -32,11 +32,14 @@ err0 = ":  Es wurde kein Wert eingegeben\n"
 err1 = ":  Der Wert ist keine Zahl\n"
 
 # Pfad des Arbeitsverzeichnisses setzen
+
 av = path.dirname(sys.argv[0])
 chdir(av)
 
 # Pfad für die Messdatei
-pfad = arbeitsverzeichnis() + "/Daten/"
+verzeichnis = "Daten"
+# pfad = arbeitsverzeichnis() + "/Daten/"
+pfad = sep.join([av,verzeichnis])
 
 dateiname = "messwerte.txt"
 dateiname_beispiel = 'messwerte_Beispiel.txt'
@@ -148,7 +151,8 @@ def datenspeichern(daten):
 
     chdir(pfad)  # wechsel in den Unterordner ./daten
 
-    if path.isfile((pfad + "/" + dateiname)):
+    # if path.isfile((pfad + "/" + dateiname)):
+    if path.isfile((sep.join([pfad, dateiname]))):
 
         fobj = open(dateiname, "a")
         fobj.write(datenset)
@@ -162,7 +166,7 @@ def datenspeichern(daten):
         fobj.close()
         print("Die Messdatei ist nicht da!")
 
-    chdir("../") # Zurück wechseln in den Programmordner
+    # chdir("../") # Zurück wechseln in den Programmordner
     return datenset
 
 
