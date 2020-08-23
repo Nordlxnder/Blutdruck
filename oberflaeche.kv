@@ -1,0 +1,129 @@
+
+<Bildschirmverwalter@ScreenManager>
+
+<Bildschirm@Screen>
+
+<Box_v@BoxLayout>
+    orientation: 'vertical'
+
+<Box_h@BoxLayout>
+    orientation: 'horizontal'
+
+<Beschriftung@Label>
+    font_size:  24
+
+<Eingabefenster@Box_v>
+
+
+<Knopf>:
+    background_normal: './bilder/knopf_orange.png'
+    background_down: './bilder/knopf_blau.png'
+    font_size:  28
+    color: 0.1,0.1,0.3,1
+    size_hint_y: 0.2
+
+
+<Knopf_Schliessen@Knopf>:
+    text: 'Schliessen'
+    on_release:
+        print("Fertig!")
+        app.stop()
+
+
+#### ROOT ####
+Bildschirmverwalter:
+    id: s0
+    name: "Verwalter"
+
+    Bildschirm:
+        id: s1
+        name: "hbs"
+
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: './bilder/mountain_1080x720.png'
+        Box_v:
+            Label:
+                id: l1
+                font_size: 30
+                text: "Dies ist eine Anzeige"
+
+            FloatLayout:
+
+                Eingabefenster:
+                    id: e1
+                    pos_hint: {'x': 0.32, 'y': 0.5}
+                    size_hint: 0.2, 0.4
+                    Beschriftung:
+                        id: b1
+                        name: "Systolischer Blutdruck"
+                        unit: "mmHg"
+                        text: b1.name +" ["+ b1.unit + "]"
+
+                    TextInput:
+                        id: Texteingabe1
+                        name: b1.name
+
+                Eingabefenster:
+                    id:e2
+                    pos_hint: {'x': 0.55, 'y': 0.5}
+                    size_hint: 0.2, 0.4
+                    Beschriftung:
+                        id: b2
+                        name: "Diastolischer Blutdruck"
+                        unit: "mmHg"
+                        text: b2.name +" ["+ b2.unit + "]"
+
+                    TextInput:
+                        id: Texteingabe2
+                        name: b2.name
+
+                Eingabefenster:
+                    id: e3
+                    pos_hint: {'x': 0.78, 'y': 0.5}
+                    size_hint: 0.2, 0.4
+                    Beschriftung:
+                        id: b3
+                        name: "Pulse"
+                        unit: "/min"
+                        text: b3.name +" ["+ b3.unit + "]"
+
+                    TextInput:
+                        id: Texteingabe3
+                        name:  b3.name
+
+                Eingabefenster:
+                    id: e4
+                    pos_hint: {'x': 0.68, 'y': 0.1}
+                    size_hint: 0.3, 0.4
+                    Beschriftung:
+                        id: b4
+                        name: "Kommentar"
+                        unit: ""
+                        text: b4.name #+" ["+ b4.unit + "]"
+
+                    TextInput:
+                        id: Texteingabe4
+                        name:  b4.name
+
+            FloatLayout:
+                Knopf:
+                    pos_hint: {'x': 0.05, 'y': 0.1}
+                    size_hint: 0.2, 0.4
+                    text: "Diagramm anzeigen"
+                    on_release:
+                        k1.diagramm_anzeigen()
+
+                Knopf:
+                    id: k1
+                    pos_hint: {'x': 0.3, 'y': 0.1}
+                    size_hint: 0.2, 0.4
+                    text: 'Werte übernehmen'
+                    on_release:
+                        k1.werte_speichern()
+
+                Knopf_Schliessen:
+                    pos_hint: {'x': 0.75, 'y': 0.1}
+                    size_hint: 0.2, 0.4
